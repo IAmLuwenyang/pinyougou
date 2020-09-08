@@ -1,8 +1,20 @@
 package com.pinyougou.pojo;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 import java.io.Serializable;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class TbAreas implements Serializable {
+
+    private static final long serialVersionUID = -5918374704662956477L;
+
     private Integer id;
 
     private String areaid;
@@ -10,36 +22,4 @@ public class TbAreas implements Serializable {
     private String area;
 
     private String cityid;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getAreaid() {
-        return areaid;
-    }
-
-    public void setAreaid(String areaid) {
-        this.areaid = areaid == null ? null : areaid.trim();
-    }
-
-    public String getArea() {
-        return area;
-    }
-
-    public void setArea(String area) {
-        this.area = area == null ? null : area.trim();
-    }
-
-    public String getCityid() {
-        return cityid;
-    }
-
-    public void setCityid(String cityid) {
-        this.cityid = cityid == null ? null : cityid.trim();
-    }
 }
