@@ -1,0 +1,5 @@
+0:0:0:0:0:0:0:1 - - [18/Jun/2020:09:27:01 +0800] "GET / HTTP/1.1" 200 52 http-bio-9106-exec-1 69
+0:0:0:0:0:0:0:1 - - [18/Jun/2020:09:27:06 +0800] "GET /register.html HTTP/1.1" 200 4222 http-bio-9106-exec-3 5
+0:0:0:0:0:0:0:1 - - [18/Jun/2020:09:27:06 +0800] "GET /js/service/userService.js HTTP/1.1" 200 931 http-bio-9106-exec-4 6
+0:0:0:0:0:0:0:1 - - [18/Jun/2020:09:27:06 +0800] "GET /js/controller/userController.js HTTP/1.1" 200 2773 http-bio-9106-exec-2 5
+0:0:0:0:0:0:0:1 - - [18/Jun/2020:09:27:19 +0800] "GET /user/sendCode.do?phone=1333781uu HTTP/1.1" 200 57 http-bio-9106-exec-6 1503

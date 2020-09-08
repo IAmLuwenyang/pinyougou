@@ -1,0 +1,17 @@
+0:0:0:0:0:0:0:1 - - [04/Jun/2020:00:11:52 +0800] "GET /admin/seller_1.html HTTP/1.1" 302 - http-bio-9101-exec-10 89
+0:0:0:0:0:0:0:1 - - [04/Jun/2020:00:31:16 +0800] "GET /admin/index.html HTTP/1.1" 302 - http-bio-9101-exec-1 130
+0:0:0:0:0:0:0:1 - - [04/Jun/2020:00:31:16 +0800] "GET /login.html HTTP/1.1" 304 - http-bio-9101-exec-3 9
+0:0:0:0:0:0:0:1 - - [04/Jun/2020:00:31:18 +0800] "POST /login HTTP/1.1" 302 - http-bio-9101-exec-4 14
+0:0:0:0:0:0:0:1 - - [04/Jun/2020:00:31:18 +0800] "GET /admin/index.html HTTP/1.1" 200 22082 http-bio-9101-exec-5 11
+0:0:0:0:0:0:0:1 - - [04/Jun/2020:00:31:18 +0800] "GET /plugins/jQueryUI/jquery-ui.min.js HTTP/1.1" 404 1017 http-bio-9101-exec-6 7
+0:0:0:0:0:0:0:1 - - [04/Jun/2020:00:31:19 +0800] "GET /plugins/jQueryUI/jquery-ui.min.js HTTP/1.1" 404 1017 http-bio-9101-exec-7 1
+0:0:0:0:0:0:0:1 - - [04/Jun/2020:00:31:19 +0800] "GET /admin/home.html HTTP/1.1" 200 4468 http-bio-9101-exec-8 3
+0:0:0:0:0:0:0:1 - - [04/Jun/2020:00:31:20 +0800] "GET /favicon.ico HTTP/1.1" 404 973 http-bio-9101-exec-2 4
+0:0:0:0:0:0:0:1 - - [04/Jun/2020:00:31:24 +0800] "GET /login/name.do HTTP/1.1" 200 21 http-bio-9101-exec-9 5679
+0:0:0:0:0:0:0:1 - - [04/Jun/2020:00:31:26 +0800] "GET /goods/genHtml.do?goodsId=149187842867964 HTTP/1.1" 200 - http-bio-9101-exec-10 1795
+0:0:0:0:0:0:0:1 - - [04/Jun/2020:00:43:49 +0800] "GET /goods/genHtml.do?goodsId=149187842867964 HTTP/1.1" 200 - http-bio-9101-exec-4 129
+0:0:0:0:0:0:0:1 - - [04/Jun/2020:00:45:23 +0800] "GET /goods/genHtml.do?goodsId=149187842867964 HTTP/1.1" 200 - http-bio-9101-exec-7 83
+0:0:0:0:0:0:0:1 - - [04/Jun/2020:01:10:32 +0800] "GET /goods/genHtml.do?goodsId=149187842867964 HTTP/1.1" 200 - http-bio-9101-exec-9 143
+0:0:0:0:0:0:0:1 - - [04/Jun/2020:01:11:14 +0800] "GET /goods/genHtml.do?goodsId=149187842867964 HTTP/1.1" 200 - http-bio-9101-exec-9 72
+0:0:0:0:0:0:0:1 - - [04/Jun/2020:01:11:56 +0800] "GET /goods/genHtml.do?goodsId=149187842867964 HTTP/1.1" 200 - http-bio-9101-exec-9 79
+0:0:0:0:0:0:0:1 - - [04/Jun/2020:01:12:51 +0800] "GET /goods/genHtml.do?goodsId=149187842867964 HTTP/1.1" 200 - http-bio-9101-exec-9 44

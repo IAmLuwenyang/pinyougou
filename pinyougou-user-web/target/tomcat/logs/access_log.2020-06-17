@@ -1,0 +1,17 @@
+0:0:0:0:0:0:0:1 - - [17/Jun/2020:11:30:58 +0800] "GET / HTTP/1.1" 200 52 http-bio-9106-exec-1 1367
+0:0:0:0:0:0:0:1 - - [17/Jun/2020:11:30:59 +0800] "GET /favicon.ico HTTP/1.1" 404 973 http-bio-9106-exec-3 3
+0:0:0:0:0:0:0:1 - - [17/Jun/2020:11:31:18 +0800] "GET /register.html HTTP/1.1" 200 4200 http-bio-9106-exec-4 3
+0:0:0:0:0:0:0:1 - - [17/Jun/2020:11:31:18 +0800] "GET /css/webbase.css HTTP/1.1" 200 254102 http-bio-9106-exec-6 8
+0:0:0:0:0:0:0:1 - - [17/Jun/2020:11:31:18 +0800] "GET /css/pages-register.css HTTP/1.1" 200 1194 http-bio-9106-exec-5 4
+0:0:0:0:0:0:0:1 - - [17/Jun/2020:11:31:18 +0800] "GET /js/base.js HTTP/1.1" 200 108 http-bio-9106-exec-10 6
+0:0:0:0:0:0:0:1 - - [17/Jun/2020:11:31:18 +0800] "GET /js/service/userService.js HTTP/1.1" 200 814 http-bio-9106-exec-1 6
+0:0:0:0:0:0:0:1 - - [17/Jun/2020:11:31:18 +0800] "GET /plugins/angularjs/angular.min.js HTTP/1.1" 200 129177 http-bio-9106-exec-7 12
+0:0:0:0:0:0:0:1 - - [17/Jun/2020:11:31:18 +0800] "GET /js/controller/userController.js HTTP/1.1" 200 2392 http-bio-9106-exec-3 6
+0:0:0:0:0:0:0:1 - - [17/Jun/2020:11:31:18 +0800] "GET /js/plugins/jquery/jquery.min.js HTTP/1.1" 200 95974 http-bio-9106-exec-9 4
+0:0:0:0:0:0:0:1 - - [17/Jun/2020:11:31:18 +0800] "GET /js/plugins/jquery-placeholder/jquery.placeholder.min.js HTTP/1.1" 200 2162 http-bio-9106-exec-1 2
+0:0:0:0:0:0:0:1 - - [17/Jun/2020:11:31:18 +0800] "GET /js/plugins/jquery.easing/jquery.easing.min.js HTTP/1.1" 200 5643 http-bio-9106-exec-8 3
+0:0:0:0:0:0:0:1 - - [17/Jun/2020:11:31:18 +0800] "GET /js/pages/register.js HTTP/1.1" 200 58 http-bio-9106-exec-3 3
+0:0:0:0:0:0:0:1 - - [17/Jun/2020:11:31:18 +0800] "GET /js/plugins/sui/sui.min.js HTTP/1.1" 200 105315 http-bio-9106-exec-10 4
+0:0:0:0:0:0:0:1 - - [17/Jun/2020:11:31:18 +0800] "GET /img/icons.png HTTP/1.1" 200 37691 http-bio-9106-exec-10 2
+0:0:0:0:0:0:0:1 - - [17/Jun/2020:11:32:43 +0800] "GET /register.html HTTP/1.1" 200 4200 http-bio-9106-exec-6 12
+0:0:0:0:0:0:0:1 - - [17/Jun/2020:11:33:09 +0800] "POST /user/add.do HTTP/1.1" 200 41 http-bio-9106-exec-6 3056
