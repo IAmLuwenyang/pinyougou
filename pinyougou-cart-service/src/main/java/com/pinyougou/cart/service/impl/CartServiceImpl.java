@@ -1,12 +1,13 @@
 package com.pinyougou.cart.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.pinyougou.cart.service.CartService;
 import com.pinyougou.mapper.TbItemMapper;
 import com.pinyougou.pojo.TbItem;
 import com.pinyougou.pojo.TbOrderItem;
 import com.pinyougou.pojogroup.Cart;
-import com.pinyougou.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
  * @company HUST&华中科技大学
  * @create 2020-06-27 下午 04:05
  */
-@Service
+@Service(timeout = 20000, retries = -1)
 public class CartServiceImpl implements CartService {
     @Autowired
     private TbItemMapper tbItemMapper;
@@ -52,19 +53,19 @@ public class CartServiceImpl implements CartService {
         } else {//5.购物车列表中【存在】该商家的购物车
             //判断该商品是否在该购物车的明细列表中存在
             TbOrderItem orderItem = searchOrderItemByItemId(cart.getOrderItemList(), itemId);
-            if(orderItem == null){
+            if (orderItem == null) {
                 //5.1 如果不存在，创建新的购物车明细对象，并添加到该购物车的明细列表中
                 cart.getOrderItemList().add(createOrderItem(item, num));
-            }else {
+            } else {
                 //5.2 如果存在，则在原有的商品数量上增加，并更新金额
-                orderItem.setNum(orderItem.getNum()+num);
+                orderItem.setNum(orderItem.getNum() + num);
                 orderItem.setTotalFee(new BigDecimal(item.getPrice().doubleValue() * orderItem.getNum()));
                 //当明细数量≤0时，移除
-                if(orderItem.getNum()<=0){
+                if (orderItem.getNum() <= 0) {
                     cart.getOrderItemList().remove(orderItem);
                 }
                 //当购物车明细数量为0时，移除
-                if(cart.getOrderItemList().size() == 0){
+                if (cart.getOrderItemList().size() == 0) {
                     cartList.remove(cart);
                 }
             }
@@ -90,13 +91,14 @@ public class CartServiceImpl implements CartService {
 
     /**
      * 根据SKUID在购物车明细列表中查询购物车明细对象
+     *
      * @param orderItemList
      * @param itemId
      * @return
      */
-    private TbOrderItem searchOrderItemByItemId(List<TbOrderItem> orderItemList, Long itemId){
-        for(TbOrderItem orderItem : orderItemList){
-            if(orderItem.getItemId().longValue() == itemId.longValue()){
+    private TbOrderItem searchOrderItemByItemId(List<TbOrderItem> orderItemList, Long itemId) {
+        for (TbOrderItem orderItem : orderItemList) {
+            if (orderItem.getItemId().longValue() == itemId.longValue()) {
                 return orderItem;
             }
         }
@@ -105,6 +107,7 @@ public class CartServiceImpl implements CartService {
 
     /**
      * 创建购物车明细对象
+     *
      * @param item
      * @param num
      * @return
