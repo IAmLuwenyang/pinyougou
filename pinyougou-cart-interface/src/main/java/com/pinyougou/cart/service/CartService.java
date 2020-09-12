@@ -1,7 +1,6 @@
 package com.pinyougou.cart.service;
 
 import com.pinyougou.pojogroup.Cart;
-
 import java.util.List;
 
 /**
@@ -12,6 +11,7 @@ import java.util.List;
  * @create 2020-06-27 下午 04:00
  */
 public interface CartService {
+
     /**
      * 添加商品到购物车
      *
@@ -20,5 +20,21 @@ public interface CartService {
      * @param num
      * @return
      */
-    public List<Cart> addGoodsToCartList(List<Cart> list, Long itemId, Integer num);
+    List<Cart> addGoodsToCartList(List<Cart> list, Long itemId, Integer num);
+
+    /**
+     * 从 Redis中提取购物车
+     *
+     * @param username
+     * @return
+     */
+    List<Cart> findCartListFromRedis(String username);
+
+    /**
+     * 将购物车列表存储到 Redis中
+     *
+     * @param username
+     * @param cartList
+     */
+    void saveCartListToRRedis(String username, List<Cart> cartList);
 }

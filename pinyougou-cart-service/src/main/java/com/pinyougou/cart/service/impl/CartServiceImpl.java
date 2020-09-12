@@ -1,16 +1,20 @@
 package com.pinyougou.cart.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.alibaba.fastjson.JSON;
 import com.pinyougou.cart.service.CartService;
 import com.pinyougou.mapper.TbItemMapper;
 import com.pinyougou.pojo.TbItem;
 import com.pinyougou.pojo.TbOrderItem;
 import com.pinyougou.pojogroup.Cart;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 
 /**
  * @author Mr.Lu
@@ -19,8 +23,14 @@ import java.util.List;
  */
 @Service(timeout = 20000, retries = -1)
 public class CartServiceImpl implements CartService {
+
+    private static final Logger logger = LogManager.getLogger();
+
     @Autowired
     private TbItemMapper tbItemMapper;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @Override
     public List<Cart> addGoodsToCartList(List<Cart> cartList, Long itemId, Integer num) {
@@ -70,6 +80,7 @@ public class CartServiceImpl implements CartService {
                 }
             }
         }
+        logger.info("结束添加购物车，结果：[{}]", JSON.toJSONString(cartList));
         return cartList;
     }
 
@@ -123,5 +134,34 @@ public class CartServiceImpl implements CartService {
         orderItem.setTitle(item.getTitle());
         orderItem.setTotalFee(new BigDecimal(item.getPrice().doubleValue() * num));
         return orderItem;
+    }
+
+    @Override
+    public List<Cart> findCartListFromRedis(String username) {
+        List<Cart> cartList = new ArrayList<>();
+        try {
+            logger.info("开始从Redis中获取购物车列表");
+            cartList = (List<Cart>) redisTemplate.boundHashOps("cartList").get(username);
+        } catch (Exception e) {
+            logger.error("从Redis中获取购物车缓存异常,pinyougou-cart-service.CartServiceImpl.findCartListFromRedis() called with"
+                + " username = {}", username, e);
+        }
+        logger.info("结束获取购物车列表，结果：[{}]", JSON.toJSONString(cartList));
+        return cartList;
+    }
+
+    @Override
+    public void saveCartListToRRedis(String username, List<Cart> cartList) {
+        try {
+            if (username.equals("") || username == null || CollectionUtils.isEmpty(cartList)) {
+                logger.error("操作违规，原因[用户未登录/购物车列表为空]");
+                return;
+            }
+            logger.info("开始向Redis中存储购物车列表");
+            redisTemplate.boundHashOps("cartList").put(username, cartList);
+        } catch (Exception e) {
+            logger.error("存储购物车列表到Redis中异常，pinyougou-cart-service.CartServiceImpl.saveCartListToRRedis() called with "
+                + "username = {}, cartList = [{}]", username, JSON.toJSONString(cartList));
+        }
     }
 }

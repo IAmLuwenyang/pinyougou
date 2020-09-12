@@ -27,10 +27,22 @@
         <solrj.version>4.10.3</solrj.version>
         <ik.version>2012_u6</ik.version>
         <lombox.version>1.18.10</lombox.version>
+        <log4j.version>2.6.2</log4j.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <!--引入log4j日志框架-->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
             <!-- Lombox -->
             <dependency>
                 <groupId>org.projectlombok</groupId>
