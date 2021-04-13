@@ -60,23 +60,36 @@ public class CartController {
 
     @RequestMapping("/findCartList")
     public List<Cart> findCartList() {
-        List<Cart> cartList = null;
         //当前登录账号
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        if (username.equals("anonymousUser")) {//未登录
-            logger.info("开始从Cookie中查找购物车列表");
-            //从cookie中提取购物车
-            String cartListString = CookieUtil.getCookieValue(request, "cartList", "UTF-8");
-            if (cartListString == null || cartListString.equals("")) {
-                cartListString = "[]";
-            }
-            cartList = JSON.parseArray(cartListString, Cart.class);
-            cartService.saveCartListToRRedis(username, cartList);
-        } else {//已登录
-            logger.info("开始从Redis中查找购物车列表");
-            cartList = cartService.findCartListFromRedis(username);
+        logger.info("开始从Cookie中查找购物车列表");
+        //从cookie中提取购物车
+        String cartListString = CookieUtil.getCookieValue(request, "cartList", "UTF-8");
+        if (cartListString == null || cartListString.equals("")) {
+            cartListString = "[]";
         }
-        logger.info("结束查找购物车列表，结果：[{}]", JSON.toJSONString(cartList));
-        return cartList;
+        List<Cart> cartList_Cookie = JSON.parseArray(cartListString, Cart.class);
+
+        if (username.equals("anonymousUser")) {//未登录
+            logger.info("从Cookie提取购物车执行结束，结果：[{}]", JSON.toJSONString(cartList_Cookie));
+            return cartList_Cookie;
+        } else {//已登录
+            //合并购物车逻辑
+            logger.info("开始从Redis中查找购物车列表");
+            List<Cart> cartList_Redis = cartService.findCartListFromRedis(username);
+            if (cartList_Cookie.size() < 0) {
+                // RECORD [MrLu] [2020-09-13 12:11] : 在本地购物车为空的情况下不执行合并逻辑，直接返回redis中存储的购物车列表
+                return cartList_Redis;
+            }
+            List<Cart> cartList = cartService.mergeCartList(cartList_Cookie, cartList_Redis);
+            //将合并后的的购物车存入Redis中
+            cartService.saveCartListToRRedis(username, cartList);
+            //清除本地Cookie中存储的购物车
+            CookieUtil.deleteCookie(request, response, "cartList");
+
+            logger.info("从Redis查找购物车列表并合并Cookie购物车执行结束，Redis: [{}], Cookie: [{}], 结果：[{}]",
+                JSON.toJSONString(cartList_Redis), JSON.toJSONString(cartList_Cookie), JSON.toJSONString(cartList));
+            return cartList;
+        }
     }
 }

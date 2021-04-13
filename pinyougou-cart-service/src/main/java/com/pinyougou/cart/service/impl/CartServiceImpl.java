@@ -21,7 +21,7 @@ import org.springframework.data.redis.core.RedisTemplate;
  * @company HUST&华中科技大学
  * @create 2020-06-27 下午 04:05
  */
-@Service(timeout = 20000, retries = -1)
+@Service
 public class CartServiceImpl implements CartService {
 
     private static final Logger logger = LogManager.getLogger();
@@ -163,5 +163,22 @@ public class CartServiceImpl implements CartService {
             logger.error("存储购物车列表到Redis中异常，pinyougou-cart-service.CartServiceImpl.saveCartListToRRedis() called with "
                 + "username = {}, cartList = [{}]", username, JSON.toJSONString(cartList));
         }
+    }
+
+    @Override
+    public List<Cart> mergeCartList(List<Cart> cartList1, List<Cart> cartList2) {
+        if (CollectionUtils.isEmpty(cartList1)) {
+            cartList1 = new ArrayList<>();
+        }
+        if (CollectionUtils.isEmpty(cartList2)) {
+            cartList2 = new ArrayList<>();
+        }
+        for (Cart cart : cartList2) {
+            for (TbOrderItem orderItem : cart.getOrderItemList()) {
+                // RECORD [MrLu] [2020-09-13 11:53] : 重用方法
+                cartList1 = addGoodsToCartList(cartList1, orderItem.getItemId(), orderItem.getNum());
+            }
+        }
+        return cartList1;
     }
 }
